@@ -1,0 +1,244 @@
+{
+  "_note": "Giá là khoảng tham khảo (VND). Giá chính xác phụ thuộc concept và brief cụ thể. Nguồn: báo giá do Bunnie Studio cung cấp.",
+  "groups": [
+    {
+      "id": "led",
+      "name": "Visual LED",
+      "items": [
+        {
+          "id": "led-static",
+          "name": "Banner tĩnh",
+          "desc": "Cả màn hình là một ảnh tĩnh, tương tự IG ads.",
+          "min": 320000,
+          "max": 380000,
+          "unit": "thiết kế",
+          "sample": "https://drive.google.com/file/d/1z6RWPxExTTvXiE6GVHwJM7c0t_7GE7pB/view"
+        },
+        {
+          "id": "led-motion",
+          "name": "Motion banner",
+          "desc": "Banner tĩnh nhưng chữ và các chi tiết có chuyển động: lấp lánh, bay ra bay vào…",
+          "min": 380000,
+          "max": 450000,
+          "unit": "thiết kế",
+          "sample": "https://drive.google.com/file/d/1hNANG7hvEXmDL8pbclJwsn-VJgWM5-h_/view"
+        },
+        {
+          "id": "led-video",
+          "name": "Video LED",
+          "desc": "Nhiều cảnh, có hiệu ứng chuyển cảnh giữa các cảnh.",
+          "min": 1200000,
+          "max": 2500000,
+          "unit": "thiết kế",
+          "sample": "https://drive.google.com/file/d/1sRdIARBdSbg55CAUGi4YLI7SthTB-TPs/view"
+        }
+      ],
+      "notes": [
+        "Màn gập (2 màn ghép): có thể phối hợp các kiểu với nhau. Màn đơn: có thể làm intro/outro bằng motion banner hoặc banner tĩnh, phần giữa là video LED."
+      ],
+      "addons": [
+        {
+          "id": "led-preview-static",
+          "name": "Preview tĩnh",
+          "min": 150000,
+          "max": 150000,
+          "unit": "mẫu"
+        },
+        {
+          "id": "led-preview-motion",
+          "name": "Preview động",
+          "min": 220000,
+          "max": 220000,
+          "unit": "mẫu"
+        },
+        {
+          "id": "led-resize",
+          "name": "Resize LED (chuyển kích thước)",
+          "min": 220000,
+          "max": 1500000,
+          "unit": "tùy LED"
+        },
+        {
+          "id": "led-swap",
+          "name": "Đổi model/text",
+          "min": 150000,
+          "max": 250000,
+          "unit": "lần đổi"
+        }
+      ]
+    },
+    {
+      "id": "bandana",
+      "name": "Khăn bandana",
+      "items": [
+        {
+          "id": "bandana-graphic",
+          "name": "Graphic design",
+          "desc": "Thiết kế từ stock có sẵn. Hợp với thiết kế không cần nhân vật hoặc không đòi hỏi độ chi tiết cao.",
+          "min": 450000,
+          "max": 650000,
+          "unit": "khăn",
+          "sample": "https://drive.google.com/file/d/1KIawEPEhN3yHL36OlAfhiEPzCRroAcXW/view"
+        },
+        {
+          "id": "bandana-illus",
+          "name": "Vẽ illustration",
+          "desc": "Vẽ tay toàn bộ khăn qua 3 công đoạn: sketch, base màu, render. Hợp khi idea chi tiết và cần làm sát 100% ý tưởng.",
+          "min": 1000000,
+          "max": 1800000,
+          "unit": "khăn",
+          "sample": "https://drive.google.com/file/d/1e1VzY9S30J7rMcR1dCs8GqlaZPjOVWze/view"
+        }
+      ],
+      "sampleFolder": "https://drive.google.com/drive/folders/1mj1APvXFLE24pEULityUjSedWJH9frMN"
+    },
+    {
+      "id": "booth",
+      "name": "Booth",
+      "items": [
+        {
+          "id": "booth-2d",
+          "name": "Booth 2D",
+          "desc": "Thiết kế các mặt 2D của booth.",
+          "min": 1800000,
+          "max": 2500000,
+          "unit": "TODO"
+        },
+        {
+          "id": "booth-3d",
+          "name": "Booth 3D",
+          "desc": "Gồm bản vẽ 2D, dựng 3D (Blender/SketchUp), đi màu, 1 preview booth, 1 social post. Kích thước chính xác, thuận tiện cho thi công.",
+          "min": 3000000,
+          "max": 3500000,
+          "unit": "booth"
+        }
+      ]
+    },
+    {
+      "id": "print",
+      "name": "Sản phẩm in ấn",
+      "items": [
+        {
+          "name": "Backdrop",
+          "min": 320000,
+          "max": 420000,
+          "unit": "mẫu"
+        },
+        {
+          "name": "Card",
+          "min": 180000,
+          "max": 280000,
+          "unit": "mẫu / 2 mặt"
+        },
+        {
+          "name": "Banner",
+          "min": 250000,
+          "max": 350000,
+          "unit": "mẫu / 2 mặt"
+        },
+        {
+          "name": "Sticker tròn / Pin tròn…",
+          "min": 150000,
+          "max": 250000,
+          "unit": "mẫu / mặt"
+        },
+        {
+          "name": "Photostrip / Frame photobooth",
+          "min": 220000,
+          "max": 300000,
+          "unit": "mẫu / mặt"
+        },
+        {
+          "name": "Slogan vải",
+          "min": 350000,
+          "max": 450000,
+          "unit": "mẫu / 2 mặt"
+        },
+        {
+          "name": "Tower",
+          "min": 350000,
+          "max": 480000,
+          "unit": "mẫu / 2 mặt"
+        },
+        {
+          "name": "Standee",
+          "min": 220000,
+          "max": 280000,
+          "unit": "mẫu / 2 mặt"
+        }
+      ],
+      "addons": [
+        {
+          "name": "Đổi model/text (gift)",
+          "min": 80000,
+          "max": 150000,
+          "unit": "lần đổi"
+        },
+        {
+          "name": "Resize (sản phẩm khác)",
+          "contact": true
+        }
+      ]
+    },
+    {
+      "id": "digital",
+      "name": "Sản phẩm digital",
+      "items": [
+        {
+          "name": "Avatar + Cover",
+          "min": 320000,
+          "max": 480000,
+          "unit": "set"
+        },
+        {
+          "name": "Instagram Ads",
+          "min": 220000,
+          "max": 300000,
+          "unit": "mẫu"
+        },
+        {
+          "name": "Social Post",
+          "min": 180000,
+          "max": 280000,
+          "unit": "mẫu"
+        },
+        {
+          "name": "Slide thuyết trình",
+          "min": 8000,
+          "max": 20000,
+          "unit": "slide"
+        },
+        {
+          "name": "Proposal pitching, Portfolio, CV",
+          "contact": true
+        }
+      ],
+      "addons": [
+        {
+          "name": "Đổi model/text (gift)",
+          "min": 80000,
+          "max": 150000,
+          "unit": "lần đổi"
+        },
+        {
+          "name": "Resize (sản phẩm khác)",
+          "contact": true
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Resize",
+      "def": "Hai sản phẩm dùng chung một thiết kế, giữ nguyên nội dung, chỉ đổi kích thước."
+    },
+    {
+      "term": "Đổi model/text",
+      "def": "Hai sản phẩm dùng chung background/layout. Ví dụ: LED 2 giống hệt LED 1 nhưng đổi model hoặc chữ."
+    }
+  ],
+  "notListed": "Studio còn nhận thiết kế nhiều sản phẩm khác. Không thấy sản phẩm bạn cần? Liên hệ để nhận báo giá chi tiết.",
+  "ledEstimator": {
+    "_note": "Giá LED tính theo từng thiết kế hiển thị trên LED, không theo thời lượng. Ví dụ: LED 15s và LED 30s chỉ hiển thị 1 motion banner thì giá bằng nhau."
+  }
+}
