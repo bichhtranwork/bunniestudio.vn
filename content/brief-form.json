@@ -1,22 +1,17 @@
 {
-  "_note": "Form đăng ký tư vấn ban đầu. Brief chi tiết điền qua sheet sau khi cọc (Quy trình bước 3).",
-  "fields": [
-    { "id": "name", "label": "Tên / nickname", "type": "text", "required": true },
-    { "id": "phone", "label": "Số điện thoại", "type": "tel", "required": true },
-    { "id": "clientType", "label": "Bạn là", "type": "select", "options": ["Fan cá nhân", "Fanclub / fanpage", "Ekip idol", "Khác"] },
-    { "id": "project", "label": "Idol / dự án / sự kiện", "type": "text" },
-    { "id": "products", "label": "Sản phẩm cần làm", "type": "multiselect", "required": true, "source": "pricing.groups" },
-    { "id": "finalDate", "label": "Ngày cần final", "type": "date", "required": true },
-    { "id": "budget", "label": "Ngân sách dự kiến", "type": "text" },
-    { "id": "idea", "label": "Mô tả ngắn ý tưởng", "type": "textarea" },
-    { "id": "refs", "label": "Link tham khảo (Drive / Pinterest…)", "type": "url" },
-    { "id": "private", "label": "Yêu cầu private", "type": "checkbox" },
-    { "id": "commercial", "label": "Đơn thương mại / lợi nhuận", "type": "checkbox" }
-  ],
-  "prefillFrom": ["estimator", "calendar"],
-  "alternative": {
-    "title": "Không muốn để lại thông tin?",
-    "text": "Nhắn trực tiếp cho Studio để được tư vấn.",
-    "channels": ["zalo", "facebook", "hotline"]
-  }
+  "_note": "Form liên hệ và brief trên web.",
+  "contact": {
+    "fields": [ { "id": "phone", "label": "Số điện thoại", "type": "tel", "required": true } ],
+    "alternative": { "title": "Ngại để lại số điện thoại?", "text": "Tự nhắn cho Studio qua Zalo hoặc Facebook.", "channels": ["zalo", "facebook"] }
+  },
+  "brief": {
+    "options": [
+      { "id": "paste", "label": "Đã có brief", "field": { "id": "briefUrl", "type": "url", "label": "Dán link brief" } },
+      { "id": "template", "label": "Cần mẫu brief", "templates": [
+        { "id": "video-led", "label": "Brief Video / LED", "file": "brief-templates/brief-video-led.xlsx", "sheets": ["TỔNG THỂ CLIP BRIEF", "OUTLINE CLIP BRIEF", "FEEDBACK"] },
+        { "id": "design", "label": "Brief các sản phẩm khác", "file": "brief-templates/brief-thiet-ke.xlsx", "sheets": ["Brief", "Feedback"] }
+      ], "delivery": "TODO" }
+    ]
+  },
+  "prefillFrom": ["estimator", "calendar"]
 }
