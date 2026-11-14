@@ -3,6 +3,8 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const B = window.BUNNIE || {};
+  // Bản xem thử tĩnh (không có server): tắt các phần cần API.
+  const PREVIEW = !!window.BUNNIE_PREVIEW;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const vnd = (n) => n.toLocaleString('vi-VN') + 'đ';
   const short = (n) => (n >= 1e6 ? (n / 1e6).toLocaleString('vi-VN', { maximumFractionDigits: 2 }) + 'tr' : Math.round(n / 1000) + 'k');
@@ -56,7 +58,7 @@
 
   /* ---------- Trạng thái nhận đơn (theo lịch hôm nay) ---------- */
   let avail = { configured: false, days: {} };
-  const availP = fetch('/api/availability').then((r) => r.json()).then((d) => (avail = d)).catch(() => avail);
+  const availP = PREVIEW ? Promise.resolve(avail) : fetch('/api/availability').then((r) => r.json()).then((d) => (avail = d)).catch(() => avail);
 
   /* ---------- Popover "i" ---------- */
   document.addEventListener('click', (e) => {
@@ -295,6 +297,7 @@
       (it.links || []).forEach((l) => {
         const x = document.createElement('a');
         if (l.type === 'section') { x.href = l.to; x.textContent = 'Xem chi tiết trên trang'; }
+        else if (PREVIEW) return;
         else { x.href = '/blog/' + l.to; x.textContent = 'Đọc thêm trên blog'; }
         links.append(x);
       });
@@ -329,6 +332,7 @@
     const urlIn = $('[data-brief-url]'), urlErr = $('[data-brief-err]');
     let urlOk = true;
     const checkUrl = async () => {
+      if (PREVIEW) return true;
       const v = urlIn.value.trim(); urlErr.hidden = true; urlOk = true;
       if (!v) return true;
       try {
@@ -345,6 +349,11 @@
     const phone = $('[data-phone]'), phoneErr = $('[data-phone-err]'), msg = $('[data-brief-msg]'), submit = $('[data-brief-submit]');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (PREVIEW) {
+        msg.className = 'form-msg is-err'; msg.hidden = false;
+        msg.textContent = 'Đây là bản xem thử nên form chưa gửi đi. Trên website thật, thông tin sẽ về Google Sheet và email của Bunnie.';
+        return;
+      }
       const p = phone.value.replace(/[^\d+]/g, '');
       const okPhone = /^\+?\d{9,12}$/.test(p);
       phoneErr.hidden = okPhone; phone.setAttribute('aria-invalid', !okPhone);
