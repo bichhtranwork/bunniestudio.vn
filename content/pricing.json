@@ -27,10 +27,45 @@
           "id": "led-video",
           "name": "Video LED",
           "desc": "Nhiều cảnh, có hiệu ứng chuyển cảnh giữa các cảnh.",
-          "min": 1200000,
+          "min": 800000,
           "max": 2500000,
           "unit": "thiết kế",
-          "sample": "https://drive.google.com/file/d/1sRdIARBdSbg55CAUGi4YLI7SthTB-TPs/view"
+          "sample": "https://drive.google.com/file/d/1sRdIARBdSbg55CAUGi4YLI7SthTB-TPs/view",
+          "tiers": [
+            {
+              "duration": "10s",
+              "scenes": "2–3",
+              "minScenes": 2,
+              "maxScenes": 3,
+              "min": 800000,
+              "max": 1200000
+            },
+            {
+              "duration": "15s",
+              "scenes": "3–5",
+              "minScenes": 3,
+              "maxScenes": 5,
+              "min": 1200000,
+              "max": 1800000
+            },
+            {
+              "duration": "20s",
+              "scenes": "4–6",
+              "minScenes": 4,
+              "maxScenes": 6,
+              "min": 1500000,
+              "max": 2200000
+            },
+            {
+              "duration": "30s",
+              "scenes": "≤10",
+              "minScenes": 7,
+              "maxScenes": 10,
+              "min": 1800000,
+              "max": 2500000
+            }
+          ],
+          "tierNote": "Giá tính theo số scene. Thời lượng chỉ dùng để gợi ý số scene. Ví dụ: LED 30s chỉ làm 3 scene thì tính 800k–1tr2."
         }
       ],
       "notes": [
@@ -111,6 +146,20 @@
           "min": 3000000,
           "max": 3500000,
           "unit": "booth"
+        }
+      ]
+    },
+    {
+      "id": "video",
+      "name": "Edit video",
+      "items": [
+        {
+          "id": "video-recap",
+          "name": "Video recap / kỷ niệm",
+          "desc": "Video trình chiếu trong concert, sinh nhật… mang tính recap, kỷ niệm, dài trên 1 phút. Giá phụ thuộc nhiều vào kịch bản.",
+          "min": 1500000,
+          "max": 3500000,
+          "unit": "video"
         }
       ]
     },
