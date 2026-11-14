@@ -1,0 +1,16 @@
+<%- include('partials/head', { title: 'Blog, Bunnie Studio', description: 'Bunnie chia sẻ kinh nghiệm brief, làm LED, bandana và tổ chức event support nghệ sĩ.' }) %>
+<body>
+<%- include('partials/header', { page }) %>
+<main id="main" class="wrap">
+  <header class="blog-hero section-head">
+    <h1 class="display">Blog nhà Thỏ</h1>
+    <p>Kinh nghiệm brief, làm LED, bandana và chuẩn bị event, Bunnie viết lại từ những câu khách hay hỏi.</p>
+  </header>
+  <% const tagName = { chung: 'Đặt thiết kế', led: 'Visual LED', brief: 'Brief & ý tưởng', bandana: 'Bandana' }; %>
+  <ul class="post-list">
+    <% c.blogIndex.forEach(p => { %>
+      <li><a class="post-link" href="/blog/<%= p.slug %>"><span class="post-tag"><%= tagName[p.tag] || p.tag %></span><span class="post-title"><%= p.title.replace(/^[^\p{L}"]+|[^\p{L}?!"]+$/gu, '').replace(/\\/g, '') %></span></a></li>
+    <% }) %>
+  </ul>
+</main>
+<%- include('partials/footer', { c }) %>

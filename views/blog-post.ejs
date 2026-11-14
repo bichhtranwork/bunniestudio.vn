@@ -1,0 +1,19 @@
+<% const clean = post.title.replace(/^[^\p{L}"]+|[^\p{L}?!"]+$/gu, '').replace(/\\/g, ''); %>
+<%- include('partials/head', { title: clean + ', Bunnie Studio', description: 'Bài viết từ blog Bunnie Studio.' }) %>
+<body>
+<%- include('partials/header', { page }) %>
+<main id="main" class="wrap">
+  <article class="post">
+    <a class="post-back" href="/blog">Tất cả bài viết</a>
+    <h1><%= clean %></h1>
+    <div class="post-body"><%- post.html %></div>
+    <aside class="post-cta">
+      <p>Cần tư vấn cho dự án của bạn?</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/#gui-brief">Gửi brief</a>
+        <a class="btn btn-ghost" href="https://zalo.me/<%= c.contact.zalo %>" target="_blank" rel="noopener">Nhắn Zalo</a>
+      </div>
+    </aside>
+  </article>
+</main>
+<%- include('partials/footer', { c }) %>

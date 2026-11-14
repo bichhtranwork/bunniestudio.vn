@@ -1,0 +1,467 @@
+<%- include('partials/head', { title: 'Bunnie Studio, thiết kế cho các dự án support nghệ sĩ', description: 'Bunnie Studio thiết kế visual LED, booth, khăn bandana, gift và ấn phẩm cho fan, fanclub và ekip nghệ sĩ. Xem bảng giá, ước tính chi phí LED và gửi brief.' }) %>
+<body>
+<%- include('partials/header', { page }) %>
+<%
+  const P = c.pricing, groups = P.groups;
+  const byCat = (cat) => c.sampleItems.filter(s => s.category === cat);
+  const led = groups.find(g => g.id === 'led');
+  const videoLed = led.items.find(i => i.id === 'led-video');
+  const minOf = (g) => Math.min(...g.items.filter(i => i.min).map(i => i.min));
+  const heroVideos = byCat('visual-led').filter(s => s.type === 'video').slice(0, 4);
+%>
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="stamp" data-status>
+        <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#scallop"/></svg>
+        <span>Đang nhận đơn</span>
+      </p>
+      <h1 class="display hero-title">Chào mừng bạn đến với nhà Thỏ</h1>
+      <p class="lead">Bunnie thiết kế các sản phẩm với đa dạng concept, đem idea của bạn từ brief đến thành phẩm hoàn chỉnh. Hãy cùng khám phá xem nhà Thỏ có gì nhé!</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#gui-brief">Gửi brief</a>
+        <a class="btn btn-ghost" href="#bang-gia">Xem bảng giá</a>
+      </div>
+      <dl class="stats">
+        <% c.site.stats.forEach(s => { %>
+          <div><dt><%= s.label %></dt><dd class="num"><%= s.value %></dd></div>
+        <% }) %>
+      </dl>
+    </div>
+
+    <figure class="led" data-led>
+      <div class="led-bezel">
+        <div class="led-screen">
+          <% heroVideos.forEach((v, i) => { %>
+            <video class="led-clip<%= i === 0 ? ' is-on' : '' %>" muted playsinline preload="<%= i === 0 ? 'auto' : 'none' %>" poster="<%= v.poster %>" data-src="<%= v.src %>" aria-hidden="true"></video>
+          <% }) %>
+          <div class="led-pixels" aria-hidden="true"></div>
+        </div>
+      </div>
+      <figcaption class="led-caption">
+        <span>Preview LED do Bunnie thiết kế</span>
+        <span class="led-dots" aria-hidden="true"><% heroVideos.forEach((v,i) => { %><i<%= i===0 ? ' class=on' : '' %>></i><% }) %></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ SẢN PHẨM ============ -->
+<section class="section" id="san-pham" aria-labelledby="h-san-pham">
+  <div class="wrap">
+    <header class="section-head">
+      <h2 class="display h2" id="h-san-pham">Nhà Thỏ làm gì?</h2>
+      <p>Từ màn LED ngoài trời đến chiếc sticker nhỏ trong túi gift, mỗi sản phẩm đều được thiết kế riêng theo brief của bạn.</p>
+    </header>
+
+    <div class="products">
+      <%
+        const prodCards = [
+          { id: 'led', cat: 'visual-led', title: 'Visual LED', text: 'Banner tĩnh, motion banner và video LED cho màn đơn lẫn màn gập.', media: byCat('visual-led').find(s => s.type === 'video'), big: true },
+          { id: 'booth', cat: 'booth', title: 'Booth & truck', text: 'Booth 2D, dựng 3D chính xác kích thước để thi công.', media: byCat('booth')[3] },
+          { id: 'bandana', cat: 'bandana', title: 'Khăn bandana', text: 'Graphic design hoặc vẽ illustration tay toàn bộ.', media: byCat('bandana')[0] },
+          { id: 'print', cat: 'in-an', title: 'Ấn phẩm in', text: 'Banner, card, slogan, standee, sticker, photostrip.', media: byCat('in-an')[6] },
+          { id: 'digital', cat: 'digital', title: 'Sản phẩm digital', text: 'IG ads, social post, avatar và cover, slide.', media: byCat('digital')[1] },
+          { id: 'video', title: 'Edit video', text: 'Video recap, kỷ niệm trình chiếu trong concert, sinh nhật, dài trên 1 phút.', wide: true },
+        ];
+      %>
+      <% prodCards.forEach(p => { const g = groups.find(x => x.id === p.id); %>
+        <a class="product<%= p.big ? ' product-big' : '' %><%= p.wide ? ' product-wide' : '' %>" href="#bang-gia" data-goto-tab="<%= p.id %>">
+          <% if (p.media) { %><span class="product-media">
+            <% if (p.media.type === 'video') { %>
+              <video muted loop playsinline preload="none" poster="<%= p.media.poster %>" data-autoplay data-src="<%= p.media.src %>" aria-hidden="true"></video>
+            <% } else { %>
+              <img src="<%= p.media.thumb %>" alt="" loading="lazy" draggable="false" width="<%= p.media.w %>" height="<%= p.media.h %>">
+            <% } %>
+          </span><% } %>
+          <span class="product-body">
+            <span class="product-title"><%= p.title %></span>
+            <span class="product-text"><%= p.text %></span>
+            <% if (g) { %><span class="product-price">từ <b class="num-inline"><%= money(minOf(g), minOf(g)) %></b></span><% } %>
+          </span>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAMPLE ============ -->
+<section class="section section-tint" id="sample" aria-labelledby="h-sample">
+  <div class="wrap">
+    <header class="section-head">
+      <h2 class="display h2" id="h-sample">Sample</h2>
+      <p>Một phần sản phẩm Bunnie đã thực hiện. Nhiều preview chưa được công khai vì sự kiện của khách chưa diễn ra, nếu cần xem thêm mẫu nào, bạn cứ nhắn Bunnie nhé.</p>
+    </header>
+
+    <div class="filters" role="tablist" aria-label="Lọc sample theo loại" data-filters>
+      <button type="button" role="tab" aria-selected="true" data-filter="all">Tất cả</button>
+      <% c.samples.categories.filter(k => k.id !== 'thanh-pham' && k.id !== 'edit-video').concat([{id:'illustration', name:'Illustration & typo'}]).forEach(k => { if (!byCat(k.id).length) return; %>
+        <button type="button" role="tab" aria-selected="false" data-filter="<%= k.id %>"><%= k.name %></button>
+      <% }) %>
+    </div>
+
+    <ul class="gallery" data-gallery>
+      <% c.sampleItems.filter(s => s.category !== 'thanh-pham').forEach((s, i) => { %>
+        <li class="gallery-item" data-cat="<%= s.category %>">
+          <button type="button" class="gallery-btn" data-lightbox="<%= i %>" aria-label="Xem lớn sample <%= i + 1 %>">
+            <% if (s.type === 'video') { %>
+              <video muted loop playsinline preload="none" poster="<%= s.poster %>" data-autoplay data-src="<%= s.src %>" aria-hidden="true" style="aspect-ratio:<%= s.w %>/<%= s.h %>"></video>
+              <span class="badge-video">Video</span>
+            <% } else { %>
+              <img src="<%= s.thumb %>" data-full="<%= s.src %>" alt="Sample <%= (c.samples.categories.find(k => k.id === s.category) || {name: 'Illustration'}).name %>" loading="lazy" draggable="false" width="<%= s.w %>" height="<%= s.h %>">
+            <% } %>
+          </button>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ THÀNH PHẨM THỰC TẾ ============ -->
+<section class="section" id="thanh-pham" aria-labelledby="h-thanh-pham">
+  <div class="wrap">
+    <header class="section-head section-head-row">
+      <h2 class="display h2" id="h-thanh-pham">Thành phẩm thực tế</h2>
+      <p>Thiết kế sau khi được in, may và thi công, chụp lại từ đơn của khách.</p>
+    </header>
+  </div>
+  <div class="strip" tabindex="0" aria-label="Ảnh thành phẩm, cuộn ngang để xem thêm">
+    <% byCat('thanh-pham').forEach(s => { %>
+      <figure class="strip-item">
+        <% if (s.type === 'video') { %>
+          <video muted loop playsinline preload="none" poster="<%= s.poster %>" data-autoplay data-src="<%= s.src %>" aria-hidden="true"></video>
+        <% } else { %>
+          <img src="<%= s.thumb %>" alt="Ảnh thành phẩm thực tế" loading="lazy" draggable="false" width="<%= s.w %>" height="<%= s.h %>">
+        <% } %>
+      </figure>
+    <% }) %>
+  </div>
+</section>
+
+<!-- ============ BẢNG GIÁ ============ -->
+<section class="section" id="bang-gia" aria-labelledby="h-bang-gia">
+  <div class="wrap">
+    <header class="section-head">
+      <h2 class="display h2" id="h-bang-gia">Bảng giá</h2>
+      <p>Giá là khoảng tham khảo, tính theo từng thiết kế. Giá chính xác dựa trên concept và brief cụ thể của bạn. Bấm <b>Thêm</b> để cộng dần vào báo giá tạm tính.</p>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="Nhóm sản phẩm" data-tabs>
+      <% groups.forEach((g, gi) => { %>
+        <button type="button" role="tab" id="tab-<%= g.id %>" aria-controls="panel-<%= g.id %>" aria-selected="<%= gi === 0 %>" tabindex="<%= gi === 0 ? 0 : -1 %>" data-tab="<%= g.id %>"><%= g.name %></button>
+      <% }) %>
+    </div>
+
+    <div class="price-layout">
+      <div>
+        <% groups.forEach((g, gi) => { %>
+          <div class="price-panel" role="tabpanel" id="panel-<%= g.id %>" aria-labelledby="tab-<%= g.id %>"<%= gi === 0 ? '' : ' hidden' %>>
+            <ul class="price-list">
+              <% g.items.forEach((it, ii) => { const id = it.id || `${g.id}-${ii}`; %>
+                <li class="price-row">
+                  <div class="price-main">
+                    <h3 class="price-name"><%= it.name %></h3>
+                    <% if (it.desc) { %><p class="price-desc"><%= it.desc %></p><% } %>
+                    <% if (it.tiers) { %>
+                      <ul class="tiers">
+                        <% it.tiers.forEach(t => { %><li><span>Video <%= t.duration %> (<%= t.scenes %> scene)</span><b class="num-inline"><%= money(t.min, t.max) %></b></li><% }) %>
+                      </ul>
+                      <p class="price-note"><%= it.tierNote %></p>
+                    <% } %>
+                    <% if (it.sample) { %><a class="link-sm" href="<%= it.sample %>" target="_blank" rel="noopener">Xem mẫu</a><% } %>
+                  </div>
+                  <div class="price-side">
+                    <% if (it.contact) { %>
+                      <span class="price-val price-contact">Liên hệ báo giá</span>
+                    <% } else { %>
+                      <span class="price-val num-inline"><%= money(it.min, it.max) %></span>
+                      <span class="price-unit">/ <%= it.unit %></span>
+                      <button type="button" class="btn btn-add" data-add='<%= JSON.stringify({ id, name: `${g.name}: ${it.name}`, min: it.min, max: it.max }) %>' aria-label="Thêm <%= it.name %> vào báo giá tạm tính">Thêm</button>
+                    <% } %>
+                  </div>
+                </li>
+              <% }) %>
+            </ul>
+
+            <% if (g.notes) { g.notes.forEach(n => { %><p class="price-note"><%= n %></p><% }) } %>
+
+            <% if (g.id === 'led') { %>
+              <a class="callout-link" href="#uoc-tinh-led">Làm LED lần đầu? Dùng công cụ ước tính để xếp kết cấu LED và xem khoảng giá.</a>
+            <% } %>
+
+            <% if (g.addons) { %>
+              <div class="addons">
+                <h3 class="addons-h">Dịch vụ thêm</h3>
+                <ul>
+                  <% g.addons.forEach(a => { const term = (P.glossary || []).find(x => a.name.startsWith(x.term)); %>
+                    <li>
+                      <span><%= a.name %>
+                        <% if (term) { %>
+                          <button type="button" class="info" aria-expanded="false" data-info aria-label="<%= term.term %> là gì?">i</button>
+                          <span class="info-pop" role="note" hidden><b><%= term.term %>:</b> <%= term.def %></span>
+                        <% } %>
+                      </span>
+                      <b class="num-inline"><%= a.contact ? 'Liên hệ' : money(a.min, a.max) %></b><% if (!a.contact) { %><small> / <%= a.unit %></small><% } %>
+                    </li>
+                  <% }) %>
+                </ul>
+              </div>
+            <% } %>
+          </div>
+        <% }) %>
+
+        <div class="not-listed">
+          <p class="not-listed-title">Không thấy sản phẩm bạn cần?</p>
+          <p>Studio còn nhận thiết kế nhiều sản phẩm khác: cup, quạt, ticket, brochure, lanyard, roadshow… Gửi brief để Bunnie báo giá chi tiết cho bạn.</p>
+          <a class="btn btn-primary" href="#gui-brief">Nhận báo giá</a>
+        </div>
+      </div>
+
+      <aside class="quote" aria-labelledby="h-quote" data-quote>
+        <h3 id="h-quote" class="quote-h">Báo giá tạm tính</h3>
+        <ul class="quote-list" data-quote-list><li class="quote-empty">Chưa có sản phẩm nào. Bấm <b>Thêm</b> ở bảng giá.</li></ul>
+        <p class="quote-total"><span>Tạm tính</span><b class="num" data-quote-total>0đ</b></p>
+        <p class="fineprint">Chỉ mang tính tham khảo. Chưa gồm phụ phí gấp, thương mại, private.</p>
+        <a class="btn btn-primary btn-block" href="#gui-brief" data-quote-send>Gửi kèm báo giá này</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ƯỚC TÍNH LED ============ -->
+<section class="section section-dark" id="uoc-tinh-led" aria-labelledby="h-led">
+  <div class="wrap">
+    <header class="section-head">
+      <h2 class="display h2" id="h-led">Ước tính giá LED</h2>
+      <p>Xếp các khối nội dung theo thứ tự sẽ chiếu trên màn LED. Giá tính theo từng thiết kế, không theo thời lượng.</p>
+    </header>
+
+    <div class="est" data-est>
+      <div class="est-controls">
+        <fieldset class="field">
+          <legend>Loại màn</legend>
+          <div class="seg">
+            <label><input type="radio" name="screen" value="single" checked> Màn đơn</label>
+            <label><input type="radio" name="screen" value="fold"> Màn gập (2 màn)</label>
+          </div>
+        </fieldset>
+        <label class="field">
+          <span>Thời lượng LED</span>
+          <select name="duration" data-est-duration>
+            <option value="10">10 giây</option><option value="15" selected>15 giây</option><option value="20">20 giây</option><option value="30">30 giây</option><option value="60">Trên 30 giây</option>
+          </select>
+        </label>
+        <div class="field">
+          <span>Thêm khối</span>
+          <div class="est-add">
+            <% [['static','Banner tĩnh','Cả màn là một ảnh tĩnh, giống IG ads.'],['motion','Motion banner','Banner tĩnh nhưng chữ và chi tiết có chuyển động: lấp lánh, bay ra bay vào…'],['video','Video LED','Nhiều scene, có hiệu ứng chuyển cảnh giữa các scene.']].forEach(([k,n,d]) => { %>
+              <div class="est-type">
+                <button type="button" class="btn btn-chip" data-est-add="<%= k %>">+ <%= n %></button>
+                <button type="button" class="info" aria-expanded="false" data-info aria-label="<%= n %> là gì?">i</button>
+                <span class="info-pop" role="note" hidden><b><%= n %>:</b> <%= d %> <a href="https://zalo.me/<%= c.contact.zalo %>" target="_blank" rel="noopener">Hỏi Studio</a></span>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+
+      <div class="est-stage">
+        <div class="est-lanes" data-est-lanes></div>
+        <p class="est-hint" data-est-hint>Ví dụ: Motion banner (intro) + Video LED + Motion banner (outro).</p>
+      </div>
+
+      <div class="est-result" aria-live="polite">
+        <p class="est-total"><span>Ước tính</span><b class="num" data-est-total>0đ</b></p>
+        <p class="fineprint">Công cụ chỉ mang tính tham khảo, ước lượng. Giá chính xác phụ thuộc concept và brief cụ thể, Studio sẽ báo giá sau khi trao đổi.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#gui-brief" data-est-send>Chat với Studio để chốt giá</a>
+          <button type="button" class="btn btn-ghost-light" data-est-reset>Làm lại</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LỊCH TRỐNG ============ -->
+<section class="section" id="lich-trong" aria-labelledby="h-lich">
+  <div class="wrap cal-grid">
+    <header class="section-head">
+      <h2 class="display h2" id="h-lich">Lịch trống</h2>
+      <p>Bunnie nhận đơn theo slot. Chọn ngày bạn cần có <b>final</b> để xem lịch và phí gấp nếu có.</p>
+      <ul class="legend">
+        <li><i class="dot dot-open"></i>Trống</li><li><i class="dot dot-limited"></i>Còn ít</li><li><i class="dot dot-full"></i>Kín</li>
+      </ul>
+      <p class="fineprint">Lịch chỉ được giữ chính thức sau khi cọc. Trước đó là bước tư vấn. Nên đặt lịch tối thiểu 2 tuần, lý tưởng 3–4 tuần trước ngày cần final.</p>
+    </header>
+    <div class="cal" data-cal>
+      <div class="cal-head">
+        <button type="button" class="cal-nav" data-cal-prev aria-label="Tháng trước">‹</button>
+        <p class="cal-title" data-cal-title aria-live="polite"></p>
+        <button type="button" class="cal-nav" data-cal-next aria-label="Tháng sau">›</button>
+      </div>
+      <div class="cal-grid-days" role="grid" data-cal-days></div>
+      <div class="cal-out" data-cal-out aria-live="polite"><p>Chọn một ngày trên lịch.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUY TRÌNH ============ -->
+<section class="section section-tint" id="quy-trinh" aria-labelledby="h-quy-trinh">
+  <div class="wrap">
+    <header class="section-head">
+      <h2 class="display h2" id="h-quy-trinh">Quy trình làm việc</h2>
+      <p>Từ tin nhắn đầu tiên đến file final. Bước nào cũng có Bunnie đồng hành.</p>
+    </header>
+    <ol class="steps">
+      <% c.rules.steps.forEach(s => { const detail = s.n === 4; %>
+        <li class="step<%= detail ? ' step-more' : '' %>"<%= detail ? ' tabindex=0' : '' %>>
+          <span class="step-n num" aria-hidden="true"><%= s.n %></span>
+          <h3 class="step-title"><%= s.title.charAt(0) + s.title.slice(1).toLowerCase() %></h3>
+          <% if (detail) { %>
+            <p class="step-sum">Bunnie gửi moodboard trước khi làm. Đơn vẽ có thêm sketch. Rê chuột hoặc chạm để xem quy trình riêng cho sản phẩm video.</p>
+            <div class="step-detail"><%- s.html %></div>
+          <% } else { %>
+            <div class="step-body"><%- s.html %></div>
+          <% } %>
+        </li>
+      <% }) %>
+    </ol>
+    <div class="key-facts">
+      <p><b class="num-inline">50%</b> Cọc tối thiểu để giữ slot và bắt đầu.</p>
+      <p><b class="num-inline">+1–3 ngày</b> Deadline của Bunnie là ngày gửi demo, final có sau demo 1–3 ngày.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LƯU Ý ============ -->
+<section class="section" id="luu-y" aria-labelledby="h-luu-y">
+  <div class="wrap luu-y-grid">
+    <header class="section-head">
+      <h2 class="display h2" id="h-luu-y">Lưu ý khi đặt sản phẩm</h2>
+      <p>Bạn đọc kỹ trước khi cọc nhé. Bấm vào từng mục để xem chi tiết.</p>
+      <table class="fee-table">
+        <caption>Tóm tắt phụ phí</caption>
+        <tbody>
+          <tr><th scope="row">Gấp 2–4 ngày</th><td>+50%</td></tr>
+          <tr><th scope="row">Gấp 24 giờ</th><td>+100%</td></tr>
+          <tr><th scope="row">Booth dưới 5 ngày</th><td>+50–100%</td></tr>
+          <tr><th scope="row">Đơn thương mại</th><td>+100%</td></tr>
+          <tr><th scope="row">Bảo mật tuyệt đối</th><td>+20%</td></tr>
+          <tr><th scope="row">Working file PSD/AI</th><td>+100%</td></tr>
+          <tr><th scope="row">Lấy background</th><td>+30%</td></tr>
+          <tr><th scope="row">Đổi style / làm lại</th><td>+50%</td></tr>
+        </tbody>
+      </table>
+    </header>
+    <div class="accordion">
+      <% const sums = { 1: 'Cọc tối thiểu 50%, gửi brief trước ít nhất 10 ngày.', 2: 'Mặc định được đăng sample. Bảo mật tuyệt đối +20%.', 3: 'Không sao chép, cover, feed AI. Vi phạm phụ phí 50%.', 4: 'Gấp, thương mại và mua file gốc.', 5: 'Số lần sửa miễn phí theo từng loại sản phẩm.', 6: 'Điều kiện hoàn cọc 100% hoặc 50%.', 7: 'File final giữ 1 tháng, PSD giữ 2 tuần.' }; %>
+      <% c.rules.terms.forEach(t => { %>
+        <details class="acc">
+          <summary><span class="acc-title"><%= t.title.charAt(0) + t.title.slice(1).toLowerCase().replace(/\(ai\)/,'(AI)').replace(/psd/g,'PSD').replace(/\bai\b/g,'AI') %></span><span class="acc-sum"><%= sums[t.n] %></span></summary>
+          <div class="acc-body"><%- t.html %></div>
+        </details>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section section-tint" id="faq" aria-labelledby="h-faq">
+  <div class="wrap faq-grid">
+    <header class="section-head">
+      <h2 class="display h2" id="h-faq">Hỏi Bunnie</h2>
+      <p>Bấm vào câu hỏi, Bunnie trả lời ngay. Chưa thấy câu bạn cần thì nhắn trực tiếp nhé.</p>
+      <a class="btn btn-ghost" href="https://zalo.me/<%= c.contact.zalo %>" target="_blank" rel="noopener">Nhắn Zalo cho Studio</a>
+    </header>
+    <div class="chat" data-chat>
+      <div class="chat-log" data-chat-log aria-live="polite">
+        <div class="bubble bubble-in"><p>Chào bạn, Bunnie đây. Bạn muốn hỏi gì nè?</p></div>
+      </div>
+      <div class="chat-qs" data-chat-qs>
+        <% c.faq.groups.forEach(g => { %>
+          <p class="chat-group"><%= g.name %></p>
+          <% g.items.forEach(it => { %>
+            <button type="button" class="chip-q" data-q='<%= JSON.stringify(it) %>'><%= it.q %></button>
+          <% }) %>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GỬI BRIEF ============ -->
+<section class="section" id="gui-brief" aria-labelledby="h-brief">
+  <div class="wrap brief-grid">
+    <header class="section-head">
+      <h2 class="display h2" id="h-brief">Gửi brief cho Bunnie</h2>
+      <p>Để lại số điện thoại, Bunnie sẽ liên hệ tư vấn. Tư vấn và lên concept hoàn toàn miễn phí.</p>
+      <div class="alt-contact">
+        <p><b>Ngại để lại số điện thoại?</b> Tự nhắn cho Studio:</p>
+        <div class="actions">
+          <a class="btn btn-ghost" href="https://zalo.me/<%= c.contact.zalo %>" target="_blank" rel="noopener">Zalo</a>
+          <a class="btn btn-ghost" href="https://m.me/bunniestu" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </div>
+    </header>
+
+    <form class="brief" data-brief novalidate>
+      <label class="field">
+        <span>Số điện thoại</span>
+        <input type="tel" name="phone" inputmode="tel" autocomplete="tel" required placeholder="09xx xxx xxx" data-phone>
+        <small class="field-err" data-phone-err hidden>Số điện thoại chưa đúng, bạn kiểm tra lại giúp Bunnie nhé.</small>
+      </label>
+
+      <fieldset class="field">
+        <legend>Brief của bạn</legend>
+        <div class="seg">
+          <label><input type="radio" name="briefMode" value="paste" checked> Đã có brief</label>
+          <label><input type="radio" name="briefMode" value="template"> Cần mẫu brief</label>
+        </div>
+      </fieldset>
+
+      <div class="brief-mode" data-mode="template" hidden>
+        <p>Chọn mẫu phù hợp. Google Sheet sẽ mở hộp thoại <b>Tạo bản sao</b> vào Drive của bạn.</p>
+        <div class="actions">
+          <% c.form.brief.options[1].templates.forEach(t => { %>
+            <a class="btn btn-ghost" href="https://docs.google.com/spreadsheets/d/<%= t.googleSheetId %>/copy" target="_blank" rel="noopener"><%= t.label %></a>
+          <% }) %>
+        </div>
+        <ol class="howto">
+          <li>Bấm <b>Tạo bản sao</b> và đổi tên file theo tên bạn.</li>
+          <li>Điền brief.</li>
+          <li class="howto-key">Bấm <b>Chia sẻ</b>, chọn <b>Bất kỳ ai có đường liên kết</b>, vai trò <b>Người chỉnh sửa</b>. Rồi sao chép link và dán vào ô bên dưới.</li>
+        </ol>
+      </div>
+
+      <label class="field">
+        <span>Link brief <small>(không bắt buộc)</small></span>
+        <input type="url" name="briefUrl" placeholder="https://docs.google.com/…" data-brief-url>
+        <small class="field-hint">Nhớ chọn Chia sẻ → Bất kỳ ai có đường liên kết → Người chỉnh sửa, để Bunnie mở được brief của bạn.</small>
+        <small class="field-err" data-brief-err hidden>Link này chưa mở quyền truy cập, Bunnie chưa xem được brief. Bạn mở quyền giúp Bunnie rồi dán lại nhé.</small>
+      </label>
+
+      <div class="attached" data-attached hidden>
+        <p class="attached-h">Gửi kèm</p>
+        <pre data-attached-text></pre>
+        <button type="button" class="link-sm" data-attached-clear>Bỏ phần gửi kèm</button>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" data-brief-submit>Gửi cho Bunnie</button>
+      <p class="form-msg" data-brief-msg role="status" hidden></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<div class="lightbox" data-lb hidden role="dialog" aria-modal="true" aria-label="Xem sample">
+  <button type="button" class="lb-close" data-lb-close aria-label="Đóng">×</button>
+  <button type="button" class="lb-nav lb-prev" data-lb-prev aria-label="Ảnh trước">‹</button>
+  <div class="lb-stage" data-lb-stage></div>
+  <button type="button" class="lb-nav lb-next" data-lb-next aria-label="Ảnh sau">›</button>
+</div>
+
+<%- include('partials/footer', { c }) %>

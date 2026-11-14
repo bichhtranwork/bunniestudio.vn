@@ -1,0 +1,60 @@
+<% const ct = c.contact; %>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="/brand/logo-white.svg" alt="Bunnie Studio" width="132" height="122">
+      <p>Bunnie Studio, Design Commission. Visual LED, booth, bandana, gift và ấn phẩm cho các dự án support nghệ sĩ.</p>
+    </div>
+    <div>
+      <h2 class="footer-h">Liên hệ</h2>
+      <ul class="footer-list">
+        <li><a href="tel:<%= ct.hotline %>">Hotline <%= ct.hotline.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3') %></a></li>
+        <li><a href="https://zalo.me/<%= ct.zalo %>" target="_blank" rel="noopener">Zalo</a></li>
+        <li><a href="<%= ct.facebook.url %>" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="mailto:<%= ct.email %>"><%= ct.email %></a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">Theo dõi</h2>
+      <ul class="footer-list">
+        <li><a href="https://www.instagram.com/<%= ct.instagram.replace('@','') %>" target="_blank" rel="noopener">Instagram <%= ct.instagram %></a></li>
+        <li><a href="https://www.threads.net/<%= ct.threads %>" target="_blank" rel="noopener">Threads <%= ct.threads %></a></li>
+        <li><a href="<%= ct.founderPortfolio %>" target="_blank" rel="noopener">Portfolio của founder</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">Trang</h2>
+      <ul class="footer-list">
+        <li><a href="/#bang-gia">Bảng giá</a></li>
+        <li><a href="/#quy-trinh">Quy trình</a></li>
+        <li><a href="/#luu-y">Lưu ý khi đặt</a></li>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-base">
+    <p>© <%= new Date().getFullYear() %> Bunnie Studio. Mọi thiết kế thuộc bản quyền của Bunnie Studio và khách hàng. Vui lòng không sao chép hay dùng để huấn luyện AI.</p>
+  </div>
+</footer>
+
+<div class="float-contact" data-float>
+  <div class="float-menu" id="float-menu" data-float-menu hidden>
+    <a href="https://zalo.me/<%= ct.zalo %>" target="_blank" rel="noopener">Nhắn Zalo</a>
+    <a href="https://m.me/bunniestu" target="_blank" rel="noopener">Nhắn Facebook</a>
+    <a href="tel:<%= ct.hotline %>">Gọi hotline</a>
+  </div>
+  <button class="float-btn" type="button" aria-expanded="false" aria-controls="float-menu" data-float-toggle>
+    <svg class="scallop" viewBox="0 0 100 100" aria-hidden="true"><use href="#scallop"/></svg>
+    <span class="float-label">Liên hệ</span>
+  </button>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="scallop" d="<%- (function(){ const n=14,R=46,r=6.2,cx=50,cy=50; let d=''; for(let i=0;i<n;i++){ const a0=(i/n)*2*Math.PI, a1=((i+1)/n)*2*Math.PI; const x0=cx+R*Math.cos(a0), y0=cy+R*Math.sin(a0), x1=cx+R*Math.cos(a1), y1=cy+R*Math.sin(a1); d+= (i===0?`M${x0.toFixed(2)},${y0.toFixed(2)}`:'') + `A${r},${r} 0 0 1 ${x1.toFixed(2)},${y1.toFixed(2)}`; } return d+'Z'; })() %>"/>
+  </defs>
+</svg>
+<script>window.BUNNIE = <%- JSON.stringify({ contact: c.contact, pricing: c.pricing, booking: c.booking, form: c.form }) %>;</script>
+<script src="/js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<a class="skip" href="#main">Bỏ qua, tới nội dung chính</a>
+<header class="site-header" data-header>
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Bunnie Studio, về trang chủ">
+      <img class="brand-mark" src="/brand/logo.svg" alt="" width="44" height="41">
+      <span class="brand-name">Bunnie Studio</span>
+    </a>
+    <nav class="nav" aria-label="Điều hướng chính">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list" data-nav-toggle>
+        <span class="sr-only">Mở menu</span><span class="nav-toggle-bar"></span>
+      </button>
+      <ul id="nav-list" class="nav-list" data-nav-list>
+        <li><a href="/#san-pham">Sản phẩm</a></li>
+        <li><a href="/#sample">Sample</a></li>
+        <li><a href="/#bang-gia">Bảng giá</a></li>
+        <li><a href="/#quy-trinh">Quy trình</a></li>
+        <li><a href="/#faq">Hỏi đáp</a></li>
+        <li><a href="/blog"<%= page === 'blog' ? ' aria-current=page' : '' %>>Blog</a></li>
+        <li class="nav-cta"><a class="btn btn-primary btn-sm" href="/#gui-brief">Gửi brief</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
