@@ -1,0 +1,19 @@
+{
+  "_note": "Cơ chế đặt lịch và phí gấp. Nguồn: Bunnie Studio cung cấp.",
+  "model": "slot",
+  "flow": [
+    "Studio và khách hẹn ngày gửi demo. Demo là bản đã hoàn thiện, gửi để khách góp ý.",
+    "Bản final có sau 0–3 ngày kể từ demo, tùy lượng feedback."
+  ],
+  "dayType": "calendar",
+  "confirmation": "Đơn chỉ được lên lịch và xác nhận sau khi khách đã cọc. Trước đó chỉ là bước tư vấn.",
+  "rush": {
+    "default": [
+      { "within": "24h", "surchargePct": [100, 100] },
+      { "within": "2-4 days", "surchargePct": [50, 50] }
+    ],
+    "booth": [
+      { "within": "<5 days", "surchargePct": [50, 100], "note": "Tùy thời gian cần có final cụ thể." }
+    ]
+  }
+}
