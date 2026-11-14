@@ -264,7 +264,7 @@
     const msg = !st ? 'Bunnie đang cập nhật lịch online. Nhắn Studio để kiểm tra ngày này nhé.'
       : st === 'full' ? 'Ngày này đã kín lịch. Nhắn Studio để hỏi lịch gần nhất nhé.'
       : st === 'limited' ? 'Ngày này còn ít slot, bạn giữ lịch sớm nhé.' : 'Ngày này còn trống.';
-    out.innerHTML = `<p><b>${selDate.getDate()}/${selDate.getMonth() + 1}/${selDate.getFullYear()}</b>${st ? `, ${stLabel[st].toLowerCase()}` : ''}</p><p>${msg}</p>${rush ? `<p class="rush">${rush}</p>` : ''}<div class="actions"><a class="btn btn-primary" href="#gui-brief" data-cal-send>Giữ lịch ngày này</a><a class="btn btn-ghost" href="https://zalo.me/${B.contact.zalo}" target="_blank" rel="noopener">Hỏi qua Zalo</a></div>`;
+    out.innerHTML = `<p><b>${selDate.getDate()}/${selDate.getMonth() + 1}/${selDate.getFullYear()}</b>${st ? `, ${stLabel[st].toLowerCase()}` : ''}</p><p>${msg}</p>${rush ? `<p class="rush">${rush}</p>` : ''}<div class="actions">${st === 'full' ? `<a class="btn btn-primary" href="https://zalo.me/${B.contact.zalo}" target="_blank" rel="noopener">Hỏi lịch gần nhất</a>` : `<a class="btn btn-primary" href="#gui-brief" data-cal-send>Giữ lịch ngày này</a><a class="btn btn-ghost" href="https://zalo.me/${B.contact.zalo}" target="_blank" rel="noopener">Hỏi qua Zalo</a>`}</div>`;
   };
   if (cal) {
     $('[data-cal-prev]', cal).onclick = () => { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); renderCal(); };

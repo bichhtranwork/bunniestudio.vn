@@ -11,6 +11,7 @@ const ROOT = __dirname;
 const CONTENT = path.join(ROOT, 'content');
 const PORT = process.env.PORT || 3000;
 const SITE_URL = process.env.SITE_URL || 'https://bunniestudio.vn';
+const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(ROOT, 'data'));
 const UPLOAD_DIR = path.resolve(process.env.UPLOAD_DIR || path.join(ROOT, 'uploads'));
 const store = createStore({ uploadDir: UPLOAD_DIR, seedFile: path.join(CONTENT, 'samples-seed.json') });
 
@@ -111,6 +112,14 @@ app.get('/sitemap.xml', (req, res) => {
   res.type('application/xml').send(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE_URL}${u}</loc></url>`).join('')}</urlset>`);
 });
 
+// Giới hạn tần suất gọi API công khai (chống spam): 20 lượt / 10 phút / IP.
+const hits = new Map();
+function rateLimit(req, res, next) {
+  const k = req.ip, now = Date.now(), h = (hits.get(k) || []).filter((t) => now - t < 10 * 6e4);
+  if (h.length >= 20) return res.status(429).json({ ok: false, error: 'rate' });
+  h.push(now); hits.set(k, h); next();
+}
+
 // ---- Lịch trống: đọc Google Sheet (CSV công khai). Cache 5 phút.
 let availCache = { at: 0, data: null };
 app.get('/api/availability', async (req, res) => {
@@ -124,9 +133,11 @@ app.get('/api/availability', async (req, res) => {
     const map = { 'trống': 'open', 'còn ít': 'limited', 'kín': 'full' };
     csv.split(/\r?\n/).slice(1).forEach((line) => {
       const [d, s] = line.split(',').map((x) => (x || '').replace(/^"|"$/g, '').trim());
-      const mm = d && d.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
       const st = map[(s || '').toLowerCase()];
-      if (mm && st) days[`${mm[3]}-${mm[2].padStart(2, '0')}-${mm[1].padStart(2, '0')}`] = st;
+      const a = d && d.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/); // 15/11/2026
+      const b = d && d.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);     // 2026-11-15
+      const k = a ? `${a[3]}-${a[2].padStart(2, '0')}-${a[1].padStart(2, '0')}` : b ? `${b[1]}-${b[2].padStart(2, '0')}-${b[3].padStart(2, '0')}` : null;
+      if (k && st) days[k] = st;
     });
     availCache = { at: Date.now(), data: { configured: true, days } };
     res.json(availCache.data);
@@ -136,7 +147,7 @@ app.get('/api/availability', async (req, res) => {
 });
 
 // ---- Kiểm tra link brief đã mở quyền "Bất kỳ ai có đường liên kết" chưa.
-app.post('/api/check-link', async (req, res) => {
+app.post('/api/check-link', rateLimit, async (req, res) => {
   let u;
   try { u = new URL(String(req.body.url || '')); } catch { return res.json({ ok: false, reason: 'invalid' }); }
   if (!/^https?:$/.test(u.protocol)) return res.json({ ok: false, reason: 'invalid' });
@@ -157,7 +168,7 @@ app.post('/api/check-link', async (req, res) => {
 });
 
 // ---- Nhận thông tin khách: chuyển tới Google Apps Script (ghi Sheet + gửi email).
-app.post('/api/contact', async (req, res) => {
+app.post('/api/contact', rateLimit, async (req, res) => {
   const b = req.body || {};
   const phone = String(b.phone || '').replace(/[^\d+]/g, '');
   if (!/^\+?\d{9,12}$/.test(phone)) return res.status(400).json({ ok: false, error: 'phone' });
@@ -168,17 +179,20 @@ app.post('/api/contact', async (req, res) => {
     summary: String(b.summary || '').slice(0, 2000),
   };
   const hook = process.env.APPS_SCRIPT_URL;
+  // Luôn lưu bản dự phòng trên máy chủ, phòng khi Google Sheet lỗi.
   try {
-    if (hook) {
-      await fetch(hook, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(entry) });
-    } else {
-      fs.mkdirSync(path.join(ROOT, 'data'), { recursive: true });
-      fs.appendFileSync(path.join(ROOT, 'data', 'submissions.jsonl'), JSON.stringify(entry) + '\n');
-    }
-    res.json({ ok: true });
-  } catch {
-    res.status(502).json({ ok: false, error: 'forward' });
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    fs.appendFileSync(path.join(DATA_DIR, 'submissions.jsonl'), JSON.stringify(entry) + '\n');
+  } catch (e) { console.error('[contact] backup failed', e.message); }
+  if (!hook) return res.json({ ok: true });
+  try {
+    const r = await fetch(hook, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...entry, token: process.env.APPS_SCRIPT_TOKEN || '' }), redirect: 'follow' });
+    const out = await r.json().catch(() => ({}));
+    if (!out.ok) throw new Error(out.error || 'apps_script');
+  } catch (e) {
+    console.error('[contact] Apps Script lỗi, brief vẫn được lưu dự phòng:', e.message);
   }
+  res.json({ ok: true });
 });
 
 app.use((req, res) => res.status(404).render('404', { c: content(), page: '404' }));
