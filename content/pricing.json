@@ -65,7 +65,7 @@
               "max": 2500000
             }
           ],
-          "tierNote": "Giá tính theo số scene. Thời lượng chỉ dùng để gợi ý số scene. Ví dụ: LED 30s chỉ làm 3 scene thì tính 800k–1tr2."
+          "tierNote": "Giá phụ thuộc số scene và concept của video."
         }
       ],
       "notes": [
@@ -288,6 +288,34 @@
   ],
   "notListed": "Studio còn nhận thiết kế nhiều sản phẩm khác. Không thấy sản phẩm bạn cần? Liên hệ để nhận báo giá chi tiết.",
   "ledEstimator": {
-    "_note": "Giá LED tính theo từng thiết kế hiển thị trên LED, không theo thời lượng. Ví dụ: LED 15s và LED 30s chỉ hiển thị 1 motion banner thì giá bằng nhau."
+    "_note": "Quy tắc nội bộ của công cụ ước tính, không hiển thị cho khách. Giá LED tính theo từng thiết kế, không theo thời lượng.",
+    "videoSceneRules": [
+      {
+        "minScenes": 2,
+        "maxScenes": 3,
+        "min": 800000,
+        "max": 1200000
+      },
+      {
+        "minScenes": 4,
+        "maxScenes": 5,
+        "min": 1200000,
+        "max": 1800000
+      },
+      {
+        "minScenes": 6,
+        "maxScenes": 6,
+        "min": 1500000,
+        "max": 2200000
+      },
+      {
+        "minScenes": 7,
+        "maxScenes": 10,
+        "min": 1800000,
+        "max": 2500000
+      }
+    ],
+    "overMaxScenes": "contact",
+    "disclaimer": "Công cụ chỉ mang tính tham khảo và ước lượng. Giá chính xác phụ thuộc vào concept và brief cụ thể, Studio sẽ báo giá sau khi trao đổi."
   }
 }
