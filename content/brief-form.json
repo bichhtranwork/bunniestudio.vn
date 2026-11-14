@@ -52,7 +52,7 @@
               "Brief",
               "Feedback"
             ],
-            "googleSheetId": "17zgrAMe-_5tjGIUAuXrj1kt0DK-AYubwMPtMjTUMAos"
+            "googleSheetId": "1yRo-5_sXY0uoEdHFWVHxR2Jhjen4x0WBkhHprIkF8TA"
           }
         ],
         "delivery": "google-sheets-copy",
@@ -63,5 +63,11 @@
   "prefillFrom": [
     "estimator",
     "calendar"
-  ]
+  ],
+  "submissions": {
+    "store": "google-sheet",
+    "notifyEmail": "bunniestuu@gmail.com",
+    "method": "google-apps-script",
+    "_note": "Mỗi lượt gửi: thêm 1 dòng vào Sheet và gửi email báo."
+  }
 }
