@@ -42,7 +42,7 @@
               "OUTLINE CLIP BRIEF",
               "FEEDBACK"
             ],
-            "googleSheetId": "TODO"
+            "googleSheetId": "1LvF2LbahDLX3xXcDQ8X4r8cV6dc_agfPJ_LH5B_VvMY"
           },
           {
             "id": "design",
@@ -52,7 +52,7 @@
               "Brief",
               "Feedback"
             ],
-            "googleSheetId": "TODO"
+            "googleSheetId": "17zgrAMe-_5tjGIUAuXrj1kt0DK-AYubwMPtMjTUMAos"
           }
         ],
         "delivery": "google-sheets-copy",
