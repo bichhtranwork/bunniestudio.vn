@@ -9,11 +9,50 @@
   "confirmation": "Đơn chỉ được lên lịch và xác nhận sau khi khách đã cọc. Trước đó chỉ là bước tư vấn.",
   "rush": {
     "default": [
-      { "within": "24h", "surchargePct": [100, 100] },
-      { "within": "2-4 days", "surchargePct": [50, 50] }
+      {
+        "within": "24h",
+        "surchargePct": [
+          100,
+          100
+        ]
+      },
+      {
+        "within": "2-4 days",
+        "surchargePct": [
+          50,
+          50
+        ]
+      }
     ],
     "booth": [
-      { "within": "<5 days", "surchargePct": [50, 100], "note": "Tùy thời gian cần có final cụ thể." }
+      {
+        "within": "<5 days",
+        "surchargePct": [
+          50,
+          100
+        ],
+        "note": "Tùy thời gian cần có final cụ thể."
+      }
     ]
+  },
+  "availability": {
+    "source": "google-sheet",
+    "sheetCsvUrl": "TODO",
+    "states": [
+      {
+        "id": "open",
+        "label": "Trống"
+      },
+      {
+        "id": "limited",
+        "label": "Còn ít"
+      },
+      {
+        "id": "full",
+        "label": "Kín"
+      }
+    ],
+    "defaultState": "open",
+    "fullDayCta": "Nhắn Studio để hỏi lịch gần nhất"
   }
 }
