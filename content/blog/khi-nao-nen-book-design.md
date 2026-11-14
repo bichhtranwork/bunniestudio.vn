@@ -9,7 +9,7 @@ status: draft
 
 Ngay khi bạn xác định sơ lược được về idea, yêu cầu của mình thì bạn iu nên nhanh tay inbox đến nhà design mà mình ưng ý để tránh trường hợp kín lịch, gây trễ timeline, đặc biệt cuối năm sẽ là dịp có siêu nhiều event nè.🎊
 
-🌟Nếu cần có một khoảng thời gian chính xác thì tầm trước 1 - 1.5 tháng trước khi bạn cần final thì bạn iu và team có thể bắt đầu "khảo sát" thị trường design và tham khảo báo giá, sample,.. từ các bên để thảo luận với nhau sẽ chọn designer nào đồng hành với mình nha
+🌟Nếu cần có một khoảng thời gian chính xác thì bạn iu nên đặt lịch với Bunnie tối thiểu 2 tuần, lý tưởng nhất là tầm 3 - 4 tuần trước khi bạn cần final. Trước đó, bạn iu và team có thể bắt đầu "khảo sát" thị trường design, tham khảo báo giá, sample,.. từ các bên để thảo luận với nhau sẽ chọn designer nào đồng hành với mình nha
 
 🤗Lưu ý nhỏ xíu với các bạn iu là các designer trong thời gian cao điểm có thể kín lịch trước từ 1 tuần - 1 tháng tùy thời điểm nên đối với Bunnie, tụi mình có nhận pre order để mọi người có thể chủ động phần timeline design hơn nha
 
