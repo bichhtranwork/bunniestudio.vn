@@ -252,6 +252,14 @@
           "unit": "mẫu"
         },
         {
+          "id": "typo",
+          "name": "Typo",
+          "desc": "Thiết kế chữ (typography). Giá tùy độ dài và style typo muốn làm.",
+          "min": 320000,
+          "max": 500000,
+          "unit": "typo"
+        },
+        {
           "name": "Slide thuyết trình",
           "min": 8000,
           "max": 20000,

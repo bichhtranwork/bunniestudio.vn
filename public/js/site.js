@@ -271,9 +271,6 @@
     renderCal();
     availP.then(() => {
       renderCal();
-      const st = avail.configured ? avail.days[key(today)] : null;
-      const stamp = $('[data-status] span');
-      if (stamp && st === 'full') { stamp.textContent = 'Tạm kín lịch'; stamp.parentElement.classList.add('is-full'); }
     });
   }
 
