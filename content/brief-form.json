@@ -1,17 +1,67 @@
 {
   "_note": "Form liên hệ và brief trên web.",
   "contact": {
-    "fields": [ { "id": "phone", "label": "Số điện thoại", "type": "tel", "required": true } ],
-    "alternative": { "title": "Ngại để lại số điện thoại?", "text": "Tự nhắn cho Studio qua Zalo hoặc Facebook.", "channels": ["zalo", "facebook"] }
+    "fields": [
+      {
+        "id": "phone",
+        "label": "Số điện thoại",
+        "type": "tel",
+        "required": true
+      }
+    ],
+    "alternative": {
+      "title": "Ngại để lại số điện thoại?",
+      "text": "Tự nhắn cho Studio qua Zalo hoặc Facebook.",
+      "channels": [
+        "zalo",
+        "facebook"
+      ]
+    }
   },
   "brief": {
     "options": [
-      { "id": "paste", "label": "Đã có brief", "field": { "id": "briefUrl", "type": "url", "label": "Dán link brief" } },
-      { "id": "template", "label": "Cần mẫu brief", "templates": [
-        { "id": "video-led", "label": "Brief Video / LED", "file": "brief-templates/brief-video-led.xlsx", "sheets": ["TỔNG THỂ CLIP BRIEF", "OUTLINE CLIP BRIEF", "FEEDBACK"] },
-        { "id": "design", "label": "Brief các sản phẩm khác", "file": "brief-templates/brief-thiet-ke.xlsx", "sheets": ["Brief", "Feedback"] }
-      ], "delivery": "TODO" }
+      {
+        "id": "paste",
+        "label": "Đã có brief",
+        "field": {
+          "id": "briefUrl",
+          "type": "url",
+          "label": "Dán link brief"
+        }
+      },
+      {
+        "id": "template",
+        "label": "Cần mẫu brief",
+        "templates": [
+          {
+            "id": "video-led",
+            "label": "Brief Video / LED",
+            "file": "brief-templates/brief-video-led.xlsx",
+            "sheets": [
+              "TỔNG THỂ CLIP BRIEF",
+              "OUTLINE CLIP BRIEF",
+              "FEEDBACK"
+            ],
+            "googleSheetId": "TODO"
+          },
+          {
+            "id": "design",
+            "label": "Brief các sản phẩm khác",
+            "file": "brief-templates/brief-thiet-ke.xlsx",
+            "sheets": [
+              "Brief",
+              "Feedback"
+            ],
+            "googleSheetId": "TODO"
+          }
+        ],
+        "delivery": "google-sheets-copy",
+        "deliveryNote": "Nút mở https://docs.google.com/spreadsheets/d/<ID>/copy để khách tạo bản sao vào Drive của họ, điền xong mở quyền chia sẻ và dán link lại vào web."
+      }
     ]
   },
-  "prefillFrom": ["estimator", "calendar"]
+  "prefillFrom": [
+    "estimator",
+    "calendar"
+  ]
 }
