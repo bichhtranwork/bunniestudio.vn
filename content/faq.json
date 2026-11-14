@@ -1,0 +1,31 @@
+{
+  "_status": "DRAFT - chờ Bunnie duyệt",
+  "groups": [
+    { "name": "Trước khi đặt", "items": [
+      { "q": "Bunnie nhận thiết kế cho idol nào?", "a": "Bunnie không giới hạn idol hay lĩnh vực. Tụi mình đã làm cho nghệ sĩ Kpop, Vpop, Cpop, tuyển thủ Esports, idol TikTok Live, vận động viên… Chỉ cần bạn có brief, Bunnie thiết kế theo đúng ý bạn.", "src": "blog" },
+      { "q": "Lần đầu đặt thiết kế, mình chưa biết gì thì sao?", "a": "Bunnie hỗ trợ từ A đến Z: giải thích các khái niệm cơ bản, lên concept từ ý tưởng của bạn, đến khâu in ấn hoặc chiếu LED nếu bạn cần.", "src": "blog" },
+      { "q": "Tư vấn và lên concept có mất phí không?", "a": "Không. Bunnie không thu phí tư vấn hay lên concept. Bạn chỉ cọc khi hai bên đã chốt sản phẩm và bạn chốt đơn.", "src": "blog" },
+      { "q": "Nên đặt lịch trước bao lâu?", "a": "Bạn nên bắt đầu tham khảo và liên hệ khoảng 1–1,5 tháng trước ngày cần final. Mùa cao điểm (đặc biệt cuối năm) lịch có thể kín trước 1 tuần đến 1 tháng, nên Bunnie nhận pre-order để bạn chủ động timeline. Brief hoàn chỉnh cần gửi trước ngày nhận sản phẩm ít nhất 10 ngày.", "src": "blog+rules" }
+    ]},
+    { "name": "Brief & ý tưởng", "items": [
+      { "q": "Mình cần chuẩn bị gì để brief?", "a": "Có 2 cách: dùng mẫu brief Google Sheet của Bunnie, hoặc gửi brief bạn đã có. Nếu còn thiếu thông tin, Bunnie sẽ hỏi thêm và điền vào mẫu để hai bên dùng chung một link. Kích thước, màu sắc và ảnh minh họa style mong muốn là ba phần quan trọng nhất.", "src": "blog" },
+      { "q": "Mình chưa có ý tưởng thì sao?", "a": "Không sao, Bunnie sẽ cùng bạn lên brief từ những ý tưởng sơ khai nhất. Vài gợi ý để bắt đầu: dựa vào key visual của sự kiện hoặc album; tự hỏi idol hoạt động ở lĩnh vực nào và có vibe ra sao (dễ thương, ngầu, sang…); tham khảo sample của các nhà thiết kế và ảnh nghiệm thu của các agency.", "src": "blog" }
+    ]},
+    { "name": "Visual LED", "items": [
+      { "q": "Giá thiết kế LED có phụ thuộc vào vị trí màn LED không?", "a": "Không. Dù là Lotte Tây Hồ, Bà Triệu, 12bis hay SkyLED, giá phụ thuộc vào 2 yếu tố: concept/idea (độ phức tạp, chuyển động) và cấu trúc LED (toàn bộ là video, kết hợp motion banner ở intro/outro, hay toàn bộ là banner).", "src": "blog" },
+      { "q": "Làm sao để tiết kiệm chi phí LED?", "a": "Hai cách Bunnie hay gợi ý: đơn giản hóa cấu trúc, ví dụ cả LED chỉ gồm 1–2 banner tĩnh hoặc motion banner nối nhau; và tận dụng một nền gốc, sau đó đổi model/text để LED có nhiều nội dung mà không tốn nhiều chi phí.", "src": "blog" },
+      { "q": "Màn LED gập (12bis, Landmark…) nên phân bổ thế nào?", "a": "Một số cách phổ biến: 1 màn motion banner + 1 màn video; 1 video kéo dài cả 2 màn; hoặc cả 2 màn chiếu cùng một nội dung. Các cách này có thể kết hợp với nhau tùy ý bạn.", "src": "blog" }
+    ]},
+    { "name": "Bandana", "items": [
+      { "q": "Khăn bandana nên chọn graphic design hay vẽ illustration?", "a": "Tùy vào độ phức tạp của brief, ngân sách và thời gian. Graphic design dùng stock có sẵn, giá hợp lý, làm nhanh hơn, hợp với brief đơn giản. Vẽ illustration vẽ tay toàn bộ, hợp với ý tưởng chi tiết, cần làm sát bố cục và có đủ thời gian. Slot bandana có giới hạn, bạn nên hỏi lịch sớm.", "src": "blog" }
+    ]},
+    { "name": "Đơn hàng & chính sách", "items": [
+      { "q": "Có nhận làm gấp không?", "a": "Có. Gấp trong 2–4 ngày: +50% tổng đơn. Gấp trong 24 giờ: +100% tổng đơn. Riêng booth dưới 5 ngày được tính là gấp: +50% đến 100% tùy thời gian.", "src": "rules" },
+      { "q": "Mình được sửa mấy lần?", "a": "Thiết kế: miễn phí 2 lần sửa. Vẽ minh họa: 2 lần sửa sketch và 2 lần sửa màu. LED/video: 2 round feedback visual và 1 round feedback video. Sửa không ảnh hưởng brief và style cũ thì không tính phí.", "src": "rules" },
+      { "q": "Bunnie có gửi file gốc PSD/AI không?", "a": "Mặc định không. Nếu cần: working file +100% giá trị đơn, lấy background để tự chèn chi tiết +30%. File bản vẽ, bạn inbox để trao đổi thêm.", "src": "rules" },
+      { "q": "Bunnie có đăng sản phẩm của mình lên page không?", "a": "Mặc định Bunnie được đăng sample/preview. Nếu bạn cần bảo mật tuyệt đối (không lấy sample, không đăng preview, không tương tác trên mọi nền tảng), phụ phí +20% và cần báo ngay khi đơn được xác nhận.", "src": "rules" },
+      { "q": "Hủy đơn có được hoàn cọc không?", "a": "Đơn chưa làm được hoàn 100% cọc nếu báo hủy trước ít nhất 1 tuần (đơn có deadline cụ thể) hoặc 15 ngày (đơn pre-order trước nhiều tháng). Báo muộn hơn sẽ hoàn 50% cọc. Đơn đã làm sẽ phụ thu 50–70% tiền công tùy tiến độ.", "src": "rules" },
+      { "q": "Thiết kế dùng cho mục đích thương mại thì sao?", "a": "Đơn thương mại / có lợi nhuận phụ phí +100% tổng đơn.", "src": "rules" }
+    ]}
+  ]
+}
