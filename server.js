@@ -4,11 +4,15 @@ const fs = require('fs');
 const express = require('express');
 const compression = require('compression');
 const { marked } = require('marked');
+const createStore = require('./lib/samples-store');
+const adminRouter = require('./lib/admin');
 
 const ROOT = __dirname;
 const CONTENT = path.join(ROOT, 'content');
 const PORT = process.env.PORT || 3000;
 const SITE_URL = process.env.SITE_URL || 'https://bunniestudio.vn';
+const UPLOAD_DIR = path.resolve(process.env.UPLOAD_DIR || path.join(ROOT, 'uploads'));
+const store = createStore({ uploadDir: UPLOAD_DIR, seedFile: path.join(CONTENT, 'samples-seed.json') });
 
 const readJSON = (f) => JSON.parse(fs.readFileSync(path.join(CONTENT, f), 'utf8'));
 
@@ -27,7 +31,6 @@ function content() {
     contact: readJSON('contact.json'),
     site: readJSON('site.json'),
     samples: readJSON('samples.json'),
-    sampleItems: readJSON('samples-seed.json'),
     rules: parseRules(fs.readFileSync(path.join(CONTENT, 'rules-source.md'), 'utf8')),
     blogIndex,
   };
@@ -66,6 +69,7 @@ const app = express();
 app.disable('x-powered-by');
 app.set('view engine', 'ejs');
 app.set('views', path.join(ROOT, 'views'));
+app.set('trust proxy', 1);
 app.use(compression());
 app.use(express.json({ limit: '50kb' }));
 
@@ -78,12 +82,14 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static(path.join(ROOT, 'public'), { maxAge: isProd ? '7d' : 0, extensions: ['html'] }));
+app.use('/uploads', express.static(UPLOAD_DIR, { maxAge: isProd ? '30d' : 0, index: false, setHeaders: (res) => res.setHeader('X-Robots-Tag', 'noai, noimageai, noimageindex') }));
+app.use('/admin', adminRouter({ store, uploadDir: UPLOAD_DIR, categories: readJSON('samples.json').categories.filter((k) => k.id !== 'edit-video'), isProd }));
 
 const fmt = (n) => (n >= 1000000 ? `${(n / 1000000).toLocaleString('vi-VN', { maximumFractionDigits: 1 })}tr` : `${Math.round(n / 1000)}k`);
 app.locals.money = (min, max) => (min === max ? fmt(min) : `${fmt(min)} – ${fmt(max)}`);
 app.locals.SITE_URL = SITE_URL;
 
-app.get('/', (req, res) => res.render('index', { c: content(), page: 'home' }));
+app.get('/', (req, res) => res.render('index', { c: { ...content(), sampleItems: store.visible() }, page: 'home' }));
 
 app.get('/blog', (req, res) => res.render('blog-index', { c: content(), page: 'blog' }));
 app.get('/blog/:slug', (req, res, next) => {
@@ -96,7 +102,7 @@ app.get('/robots.txt', (req, res) => {
   const bots = ['GPTBot', 'ChatGPT-User', 'CCBot', 'ClaudeBot', 'Claude-Web', 'anthropic-ai', 'Google-Extended', 'PerplexityBot', 'Bytespider', 'Amazonbot', 'Applebot-Extended', 'FacebookBot', 'meta-externalagent', 'Diffbot', 'ImagesiftBot', 'cohere-ai'];
   res.type('text/plain').send(
     bots.map((b) => `User-agent: ${b}\nDisallow: /`).join('\n\n') +
-      `\n\nUser-agent: Googlebot-Image\nDisallow: /samples/\n\nUser-agent: *\nDisallow: /admin\nDisallow: /samples/\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`
+      `\n\nUser-agent: Googlebot-Image\nDisallow: /samples/\n\nUser-agent: *\nDisallow: /admin\nDisallow: /samples/\nDisallow: /uploads/\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`
   );
 });
 

@@ -83,9 +83,10 @@
   const show = (k) => {
     const list = items(); if (!list.length) return;
     lbIdx = (k + list.length) % list.length;
-    const btn = list[lbIdx], img = $('img', btn), vid = $('video', btn);
+    const btn = list[lbIdx], img = $('img', btn), vid = $('video', btn), emb = $('[data-embed]', btn);
     stage.innerHTML = '';
-    if (img) { const im = new Image(); im.src = img.dataset.full; im.alt = img.alt; im.draggable = false; stage.append(im); }
+    if (emb) { const f = document.createElement('iframe'); f.src = emb.dataset.embed; f.allow = 'autoplay; fullscreen'; f.allowFullscreen = true; f.title = 'Video sample'; f.className = 'lb-frame'; stage.append(f); }
+    else if (img) { const im = new Image(); im.src = img.dataset.full; im.alt = img.alt; im.draggable = false; stage.append(im); }
     else { const v = document.createElement('video'); v.src = vid.dataset.src; v.controls = true; v.autoplay = !reduce; v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('controlsList', 'nodownload'); stage.append(v); }
   };
   document.addEventListener('click', (e) => {

@@ -1,0 +1,71 @@
+<%- include('_head', { title: 'Quản trị sample, Bunnie Studio' }) %>
+<body class="admin">
+<header class="a-bar">
+  <a class="brand" href="/" target="_blank" rel="noopener"><img class="brand-mark" src="/brand/logo.svg" alt="" width="40" height="37"><span class="brand-name">Bunnie Studio</span></a>
+  <form method="post" action="/admin/logout"><button class="btn btn-ghost btn-sm" type="submit">Đăng xuất</button></form>
+</header>
+<main class="a-wrap">
+  <% if (msg) { %><p class="a-msg" role="status"><%= msg %></p><% } %>
+
+  <section class="a-card" aria-labelledby="h-add">
+    <h1 id="h-add">Thêm sample</h1>
+    <form method="post" action="/admin/add" enctype="multipart/form-data" class="a-form" data-add-form>
+      <label class="field"><span>Nhóm</span>
+        <select name="category" required>
+          <option value="">Chọn nhóm…</option>
+          <% categories.forEach(c => { %><option value="<%= c.id %>"><%= c.name %></option><% }) %>
+        </select>
+      </label>
+      <label class="field"><span>Ảnh hoặc video (chọn được nhiều file)</span>
+        <input type="file" name="files" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/webm" multiple>
+        <small class="field-hint">Ảnh tự thu nhỏ về 1600px, đổi sang WebP và đóng watermark. Video tối đa 80MB, nên nén trước khi up (720p, dưới 15 giây).</small>
+      </label>
+      <label class="field"><span>Hoặc dán link video Google Drive / YouTube</span>
+        <input type="url" name="videoUrl" placeholder="https://drive.google.com/file/d/…">
+        <small class="field-hint">Link Drive cần mở quyền "Bất kỳ ai có đường liên kết".</small>
+      </label>
+      <label class="field"><span>Ảnh bìa cho video <small>(không bắt buộc)</small></span>
+        <input type="file" name="cover" accept="image/jpeg,image/png,image/webp">
+      </label>
+      <label class="field"><span>Tên dự án <small>(không bắt buộc)</small></span>
+        <input type="text" name="title" maxlength="120" placeholder="Ví dụ: LED sinh nhật …">
+      </label>
+      <label class="a-check"><input type="checkbox" name="hideName"> Ẩn tên dự án (đơn private)</label>
+      <button class="btn btn-primary" type="submit" data-add-submit>Thêm sample</button>
+    </form>
+  </section>
+
+  <% categories.forEach(c => { const list = items.filter(s => s.category === c.id); %>
+    <section class="a-group" id="nhom-<%= c.id %>">
+      <h2><%= c.name %> <small><%= list.filter(s => !s.hidden).length %> đang hiện / <%= list.length %></small></h2>
+      <% if (!list.length) { %><p class="a-empty">Chưa có sample nào.</p><% } %>
+      <ul class="a-list">
+        <% list.forEach((s, i) => { %>
+          <li class="a-item<%= s.hidden ? ' is-hidden' : '' %>">
+            <div class="a-thumb">
+              <% if (s.type === 'image') { %><img src="<%= s.thumb %>" alt="" loading="lazy">
+              <% } else if (s.poster) { %><img src="<%= s.poster %>" alt="" loading="lazy"><span class="badge-video">Video</span>
+              <% } else { %><span class="a-novid">Video</span><% } %>
+            </div>
+            <form method="post" action="/admin/item/<%= s.id %>/edit" class="a-edit">
+              <input type="text" name="title" value="<%= s.title || '' %>" placeholder="Tên dự án" aria-label="Tên dự án">
+              <label class="a-check"><input type="checkbox" name="hideName"<%= s.hideName ? ' checked' : '' %>> Ẩn tên</label>
+              <button class="link-sm" type="submit">Lưu</button>
+            </form>
+            <div class="a-actions">
+              <form method="post" action="/admin/item/<%= s.id %>/up"><button type="submit" aria-label="Đưa lên" <%= i === 0 ? 'disabled' : '' %>>↑</button></form>
+              <form method="post" action="/admin/item/<%= s.id %>/down"><button type="submit" aria-label="Đưa xuống" <%= i === list.length - 1 ? 'disabled' : '' %>>↓</button></form>
+              <form method="post" action="/admin/item/<%= s.id %>/hide"><button type="submit"><%= s.hidden ? 'Hiện' : 'Ẩn' %></button></form>
+              <form method="post" action="/admin/item/<%= s.id %>/delete" onsubmit="return confirm('Xóa sample này?')"><button type="submit" class="a-del">Xóa</button></form>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    </section>
+  <% }) %>
+</main>
+<script>
+  const f = document.querySelector('[data-add-form]');
+  f && f.addEventListener('submit', () => { const b = f.querySelector('[data-add-submit]'); b.disabled = true; b.textContent = 'Đang tải lên…'; });
+</script>
+</body></html>

@@ -185,6 +185,9 @@ ul,ol{padding:0;list-style:none}
 .gallery-btn{position:relative;display:block;width:100%;padding:0;border:0;border-radius:var(--r-md);overflow:hidden;background:var(--line)}
 .gallery-btn img,.gallery-btn video{width:100%;height:auto;transition:transform .5s var(--ease),filter .3s}
 .gallery-btn:hover img{transform:scale(1.025)}
+.gallery-cap{margin-top:.4rem;font-size:.85rem;color:var(--ink-2)}
+.embed-ph{display:block;aspect-ratio:16/9;background:var(--night)}
+.lb-frame{width:min(92vw,1100px);aspect-ratio:16/9;border:0;border-radius:8px;background:#000}
 .badge-video{position:absolute;left:10px;top:10px;padding:.2rem .6rem;border-radius:999px;background:rgba(30,10,19,.75);color:#fff;font-size:.8rem}
 img,video{-webkit-user-drag:none;user-select:none}
 

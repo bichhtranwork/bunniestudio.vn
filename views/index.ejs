@@ -101,16 +101,20 @@
     </div>
 
     <ul class="gallery" data-gallery>
-      <% c.sampleItems.filter(s => s.category !== 'thanh-pham').forEach((s, i) => { %>
+      <% c.sampleItems.filter(s => s.category !== 'thanh-pham').forEach((s, i) => { const catName = (c.samples.categories.find(k => k.id === s.category) || {}).name || 'Sample'; const cap = s.title && !s.hideName ? s.title : ''; %>
         <li class="gallery-item" data-cat="<%= s.category %>">
-          <button type="button" class="gallery-btn" data-lightbox="<%= i %>" aria-label="Xem lớn sample <%= i + 1 %>">
-            <% if (s.type === 'video') { %>
-              <video muted loop playsinline preload="none" poster="<%= s.poster %>" data-autoplay data-src="<%= s.src %>" aria-hidden="true" style="aspect-ratio:<%= s.w %>/<%= s.h %>"></video>
-              <span class="badge-video">Video</span>
+          <button type="button" class="gallery-btn" data-lightbox="<%= i %>" aria-label="Xem lớn: <%= cap || catName %>">
+            <% if (s.type === 'image') { %>
+              <img src="<%= s.thumb %>" data-full="<%= s.src %>" alt="Sample <%= catName %>" loading="lazy" draggable="false" width="<%= s.w %>" height="<%= s.h %>">
+            <% } else if (s.type === 'embed') { %>
+              <% if (s.poster) { %><img src="<%= s.poster %>" alt="" loading="lazy" draggable="false" width="<%= s.w %>" height="<%= s.h %>"><% } else { %><span class="embed-ph"></span><% } %>
+              <span class="badge-video" data-embed="<%= s.embed %>">Video</span>
             <% } else { %>
-              <img src="<%= s.thumb %>" data-full="<%= s.src %>" alt="Sample <%= (c.samples.categories.find(k => k.id === s.category) || {name: 'Illustration'}).name %>" loading="lazy" draggable="false" width="<%= s.w %>" height="<%= s.h %>">
+              <video muted loop playsinline preload="<%= s.poster ? 'none' : 'metadata' %>"<% if (s.poster) { %> poster="<%= s.poster %>"<% } %> data-autoplay data-src="<%= s.src %>" aria-hidden="true" style="aspect-ratio:<%= s.w %>/<%= s.h %>"></video>
+              <span class="badge-video">Video</span>
             <% } %>
           </button>
+          <% if (cap) { %><p class="gallery-cap"><%= cap %></p><% } %>
         </li>
       <% }) %>
     </ul>
@@ -129,8 +133,8 @@
     <% byCat('thanh-pham').forEach(s => { %>
       <figure class="strip-item">
         <% if (s.type === 'video') { %>
-          <video muted loop playsinline preload="none" poster="<%= s.poster %>" data-autoplay data-src="<%= s.src %>" aria-hidden="true"></video>
-        <% } else { %>
+          <video muted loop playsinline preload="<%= s.poster ? 'none' : 'metadata' %>"<% if (s.poster) { %> poster="<%= s.poster %>"<% } %> data-autoplay data-src="<%= s.src %>" aria-hidden="true"></video>
+        <% } else if (s.type === 'image') { %>
           <img src="<%= s.thumb %>" alt="Ảnh thành phẩm thực tế" loading="lazy" draggable="false" width="<%= s.w %>" height="<%= s.h %>">
         <% } %>
       </figure>

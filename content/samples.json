@@ -1,7 +1,7 @@
 {
   "_note": "Sample do Bunnie tự upload qua /admin. Claude không xem, không tải artwork của khách. Khung trống giữ đúng tỉ lệ cho đến khi có ảnh.",
   "management": "admin-upload",
-  "storage": "server-local (UPLOAD_DIR ngoài thư mục deploy, không đưa lên GitHub)",
+  "storage": "UPLOAD_DIR (mặc định ./uploads), ngoài thư mục public, không đưa lên GitHub",
   "categories": [
     {
       "id": "visual-led",
@@ -29,6 +29,11 @@
       "id": "in-an",
       "name": "Sản phẩm in ấn",
       "ratio": "4:5"
+    },
+    {
+      "id": "illustration",
+      "name": "Illustration & typo",
+      "ratio": "1:1"
     },
     {
       "id": "digital",
