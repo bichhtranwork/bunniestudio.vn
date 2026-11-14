@@ -1,0 +1,16 @@
+{
+  "_note": "Sample do Bunnie tự upload qua /admin. Claude không xem, không tải artwork của khách. Khung trống giữ đúng tỉ lệ cho đến khi có ảnh.",
+  "management": "admin-upload",
+  "storage": "server-local (UPLOAD_DIR ngoài thư mục deploy, không đưa lên GitHub)",
+  "categories": [
+    { "id": "visual-led", "name": "Visual LED", "ratio": "16:9", "video": true },
+    { "id": "bandana", "name": "Khăn bandana", "ratio": "1:1" },
+    { "id": "booth", "name": "Booth", "ratio": "4:3" },
+    { "id": "edit-video", "name": "Edit video", "ratio": "16:9", "video": true },
+    { "id": "in-an", "name": "Sản phẩm in ấn", "ratio": "4:5" },
+    { "id": "digital", "name": "Sản phẩm digital", "ratio": "4:5" },
+    { "id": "thanh-pham", "name": "Thành phẩm thực tế", "ratio": "3:2" }
+  ],
+  "itemFields": ["category", "image|videoUrl", "title (tùy chọn)", "hideName (đơn private)", "order"],
+  "videoSources": ["google-drive-preview", "youtube-unlisted", "upload"]
+}
