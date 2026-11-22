@@ -22,7 +22,7 @@ Làm một lần, khoảng 15 phút. Dùng tài khoản Google của Bunnie (bun
 
 1. **Tệp → Chia sẻ → Xuất bản lên web**.
 2. Chọn tab **Lịch**, định dạng **Giá trị được phân tách bằng dấu phẩy (.csv)** → **Xuất bản**.
-3. Sao chép link vừa hiện ra. Đây là giá trị cho biến **`AVAILABILITY_CSV_URL`** trên hosting.
+3. Sao chép link vừa hiện ra. Đây là giá trị cho biến **`AVAILABILITY_CSV_URL`** trên hosting. Link phải kết thúc bằng `output=csv` (nếu là `output=tsv` thì sửa chữ `tsv` thành `csv`).
 
 Chỉ tab Lịch được công khai. Tab Brief (bước 3) không công khai.
 
@@ -38,6 +38,8 @@ Chỉ tab Lịch được công khai. Tab Brief (bước 3) không công khai.
    - **Người có quyền truy cập:** Bất kỳ ai
    - Bấm **Triển khai**, rồi **Cho phép truy cập** và chọn tài khoản Bunnie. Nếu Google cảnh báo "ứng dụng chưa được xác minh", bấm **Nâng cao → Đi tới … (không an toàn)**. Đây là script của chính bạn.
 6. Sao chép **URL ứng dụng web** (dạng `https://script.google.com/macros/s/…/exec`). Đây là giá trị cho biến **`APPS_SCRIPT_URL`** trên hosting.
+
+7. **Thử ngay trong Apps Script:** chọn hàm `thuGuiBrief` ở thanh công cụ (cạnh nút Gỡ lỗi), bấm **Chạy**. Nếu Sheet có thêm tab **Brief** với 1 dòng thử và hộp thư nhận được email, nghĩa là đã cài đúng. Xóa dòng thử đi là xong.
 
 Khi khách gửi form, Sheet tự có thêm tab **Brief**, mỗi lượt gửi là một dòng, và email báo sẽ về bunniestuu@gmail.com.
 

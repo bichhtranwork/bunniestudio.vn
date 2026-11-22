@@ -43,3 +43,11 @@ function doPost(e) {
 function json_(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
 }
+
+// Chạy hàm này trong trình soạn Apps Script để thử: ghi 1 dòng vào tab Brief và gửi 1 email.
+function thuGuiBrief() {
+  const res = doPost({ postData: { contents: JSON.stringify({
+    token: TOKEN, phone: '0900000000', briefUrl: '', summary: 'Đây là lượt gửi thử từ Apps Script.', at: new Date().toISOString(),
+  }) } });
+  Logger.log(res.getContent());
+}

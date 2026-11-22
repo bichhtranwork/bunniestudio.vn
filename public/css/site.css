@@ -311,7 +311,7 @@ input:focus,select:focus{outline:none;border-color:var(--rasp);box-shadow:0 0 0 
 .cal-day[data-st=full]{color:var(--ink-2);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--full) 60%,transparent)}
 .cal-day:hover:not(:disabled){background:var(--tint)}
 .cal-day:disabled{opacity:.3;cursor:default}
-.cal-day[aria-pressed=true]{background:var(--rasp);color:#fff}
+.cal-day[aria-pressed=true],.cal-day[aria-pressed=true]:hover:not(:disabled){background:var(--rasp);color:#fff}
 .cal-day.is-today{box-shadow:inset 0 0 0 1.5px var(--ink)}
 .cal-out{margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--line);display:grid;gap:var(--s-3)}
 .cal-out .rush{padding:.6rem .85rem;border-radius:var(--r-sm);background:#FFF4E0;color:#7A4A00;font-size:.95rem}
